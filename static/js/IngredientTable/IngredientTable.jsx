@@ -1,23 +1,49 @@
 import React from 'react';
+import IngredientRow from './IngredientRow/IngredientRow';
+import { Table } from 'react-bootstrap';
+
+
+const ingredientsRequest = new window.Request('http://127.0.0.1:5000/api/Ingredients',
+    {method: 'GET', dataType: 'json'});
+
 
 
 export default class IngredientTable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            count: 0
+            ingredients: new Array([])
         };
-        this.addIngredient = this.addIngredient.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
     }
-    addIngredient(){
-        console.log(this.state.count);
-        this.setState({
-            count: this.state.count + 1
-        });
+    componentDidMount(){
+        window.fetch(ingredientsRequest)
+            .then(response => {
+                if (response.status === 200) {
+                    return response.json();
+                } else {
+                    throw new Error('Something went wrong requesting Ingredients!');
+                }
+            })
+            .then(data => {
+                this.setState({ingredients: data.objects });
+            });
     }
     render() {
+        const ingredients = this.state.ingredients;
+        let key = 0;
         return (
-            <button id={"test"} onClick={this.addIngredient}>Click Me! -> {this.state.count}</button>
+            <Table >
+                <thead><tr><th>Ingredient</th><th>Count</th><th>Potion Preference</th></tr></thead>
+                <tbody>
+                    {ingredients.map(function(ingredient) {
+                        key += 1;
+                        return (
+                            <IngredientRow key={key} ingredient={ingredient}/>
+                        )
+                    })}
+                </tbody>
+            </Table>
         )
     }
 }

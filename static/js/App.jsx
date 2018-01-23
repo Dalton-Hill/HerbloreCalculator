@@ -6,7 +6,7 @@ import PotentialList from './PotentialList/PotentialList';
 export default class App extends React.Component {
     render() {
         return (
-            <div >
+            <div className={"Container"}>
                 <IngredientTable />
                 <PotentialList />
             </div>

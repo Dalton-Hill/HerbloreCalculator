@@ -17,10 +17,6 @@ export default class PotentialList extends React.Component {
     render() {
         return (
             <div>
-                <button onClick={this.setCount}>Click Me!</button>
-                <ul>
-                    <li>{this.state.count}</li>
-                </ul>
             </div>
         );
     }
