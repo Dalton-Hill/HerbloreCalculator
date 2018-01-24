@@ -1,4 +1,4 @@
-from HerbloreCalculator.secret import mysql_password
+from server.HerbloreCalculator.secret import mysql_password
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -16,8 +16,8 @@ ingredients = {
     'clean_marrentill': Ingredient(name='Clean Marrentill', ingredient_type=ingredient_types['herb']),
     'clean_tarromin': Ingredient(name='Clean Tarromin', ingredient_type=ingredient_types['herb']),
     'eye_of_newt': Ingredient(name='Eye of Newt', ingredient_type=ingredient_types['secondary']),
-    'unicorn_horn_dust': Ingredient(name='Clean Tarromin', ingredient_type=ingredient_types['secondary']),
-    'limpwurt_root': Ingredient(name='Clean Tarromin', ingredient_type=ingredient_types['secondary']),
+    'unicorn_horn_dust': Ingredient(name='Unicorn Horn Dust', ingredient_type=ingredient_types['secondary']),
+    'limpwurt_root': Ingredient(name='Limpwurt Root', ingredient_type=ingredient_types['secondary']),
 }
 
 

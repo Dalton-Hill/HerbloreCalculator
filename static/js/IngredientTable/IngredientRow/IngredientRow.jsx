@@ -9,10 +9,10 @@ import PotionPreferenceColumn from './Columns/PotionPreferenceColumn'
 export default class IngredientRow extends React.Component {
     render() {
         return (
-            <tr>
-                <IngredientNameColumn key={this.key} name={this.props.ingredient.name}/>
-                <IngredientCountColumn key={this.key}/>
-                <PotionPreferenceColumn key={this.key}/>
+            <tr ingredient-id={this.props.ingredient.id}>
+                <IngredientNameColumn key={1} name={this.props.ingredient.name}/>
+                <IngredientCountColumn key={2}/>
+                <PotionPreferenceColumn key={3} rowKey={this.props.rowKey} potions={this.props.ingredient.potions}/>
             </tr>
         );
     }

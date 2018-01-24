@@ -14,9 +14,10 @@ export default class IngredientTable extends React.Component {
         this.state = {
             ingredients: new Array([])
         };
-        this.componentDidMount = this.componentDidMount.bind(this);
+        this.fetchIngredients = this.fetchIngredients.bind(this);
+        this.fetchIngredients();
     }
-    componentDidMount(){
+    fetchIngredients(){
         window.fetch(ingredientsRequest)
             .then(response => {
                 if (response.status === 200) {
@@ -33,13 +34,13 @@ export default class IngredientTable extends React.Component {
         const ingredients = this.state.ingredients;
         let key = 0;
         return (
-            <Table >
+            <Table className={"table table-bordered"}>
                 <thead><tr><th>Ingredient</th><th>Count</th><th>Potion Preference</th></tr></thead>
                 <tbody>
                     {ingredients.map(function(ingredient) {
                         key += 1;
                         return (
-                            <IngredientRow key={key} ingredient={ingredient}/>
+                            <IngredientRow key={key} rowKey={key} ingredient={ingredient}/>
                         )
                     })}
                 </tbody>
