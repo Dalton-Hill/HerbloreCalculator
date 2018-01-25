@@ -1,5 +1,5 @@
 import React from 'react';
-import { DropdownButton, MenuItem } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
 
 export default class PotionPreferenceColumn extends React.Component {
@@ -17,19 +17,22 @@ export default class PotionPreferenceColumn extends React.Component {
         this.setState({potions: nextProps.potions})
     }
     render() {
-        const rowKey = this.props.rowKey;
-        let key = 0;
         return (
             <td className={"PotionPreferenceColumn"}>
-                <DropdownButton bsStyle={"default"} title={"Choose a Potion"} key={rowKey} id={'Dropdown' + rowKey}>
-                    {this.state.potions.map(function(potion) {
-                        key += 1;
-                        return (
-                            <MenuItem key={key} potion-id={potion.id}>{potion.name}
-                            </MenuItem>
-                        )
-                    })}
-                </DropdownButton>
+                <FormGroup controlId={"formControlsSelect"}>
+                    <FormControl componentClass={"select"} placeholder={"select"}>
+                        <option potion-id={null}>Choose a Potion</option>
+                        {this.state.potions.map(function(potion) {
+                            return (
+                                <option
+                                    potion-id={potion.id}
+                                    potion-ingredients={potion.ingredients}
+                                >{potion.name}
+                                </option>
+                            )
+                        })}
+                    </FormControl>
+                </FormGroup>
             </td>
         )
     }
