@@ -17,14 +17,17 @@ export default class PotionPreferenceColumn extends React.Component {
         this.setState({potions: nextProps.potions})
     }
     render() {
+        let key = 0;
         return (
             <td className={"PotionPreferenceColumn"}>
                 <FormGroup controlId={"formControlsSelect"}>
                     <FormControl componentClass={"select"} placeholder={"select"}>
-                        <option potion-id={null}>Choose a Potion</option>
+                        <option potion-id={null} key={key}>Choose a Potion</option>
                         {this.state.potions.map(function(potion) {
+                            key += 1;
                             return (
                                 <option
+                                    key={key}
                                     potion-id={potion.id}
                                     potion-ingredients={potion.ingredients}
                                 >{potion.name}

@@ -7,7 +7,9 @@ export default class IngredientCountColumn extends React.Component {
         return (
             <td className={"IngredientCountColumn"}>
                 <FormGroup controlId={"formControlInput"}>
-                    <input type={"text"} className={"form-control"} id={"count" + this.props.rowId}></input>
+                    <input type={"text"} className={"form-control"} id={"count" + this.props.rowId}
+                           ingredient-id={this.props.ingredient.id}
+                           onChange={this.props.parentUpdateIngredientCount}></input>
                 </FormGroup>
             </td>
         )

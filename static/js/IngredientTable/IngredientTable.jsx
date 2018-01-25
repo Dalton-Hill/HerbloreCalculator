@@ -3,35 +3,23 @@ import IngredientRow from './IngredientRow/IngredientRow';
 import { Table } from 'react-bootstrap';
 
 
-const ingredientsRequest = new window.Request('http://127.0.0.1:5000/api/Ingredients',
-    {method: 'GET', dataType: 'json'});
-
-
-
 export default class IngredientTable extends React.Component {
-    constructor(props) {
+    constructor(props){
         super(props);
+        let ingredients = this.props.ingredients;
+        if (ingredients === undefined) {
+            ingredients = new Array([])
+        }
         this.state = {
-            ingredients: new Array([])
-        };
-        this.fetchIngredients = this.fetchIngredients.bind(this);
-        this.fetchIngredients();
+            ingredients: ingredients
+        }
     }
-    fetchIngredients(){
-        window.fetch(ingredientsRequest)
-            .then(response => {
-                if (response.status === 200) {
-                    return response.json();
-                } else {
-                    throw new Error('Something went wrong requesting Ingredients!');
-                }
-            })
-            .then(data => {
-                this.setState({ingredients: data.objects });
-            });
+    componentWillReceiveProps(nextProps){
+        this.setState({ingredients: nextProps.ingredients})
     }
     render() {
         const ingredients = this.state.ingredients;
+        const parentUpdateIngredientCount = this.props.parentUpdateIngredientCount;
         let key = 0;
         return (
             <Table className={"table table-bordered"}>
@@ -40,7 +28,8 @@ export default class IngredientTable extends React.Component {
                     {ingredients.map(function(ingredient) {
                         key += 1;
                         return (
-                            <IngredientRow key={key} rowKey={key} ingredient={ingredient}/>
+                            <IngredientRow key={key} rowKey={key} ingredient={ingredient}
+                            parentUpdateIngredientCount={parentUpdateIngredientCount}/>
                         )
                     })}
                 </tbody>

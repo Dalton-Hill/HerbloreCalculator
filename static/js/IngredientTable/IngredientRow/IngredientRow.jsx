@@ -11,8 +11,9 @@ export default class IngredientRow extends React.Component {
         return (
             <tr ingredient-id={this.props.ingredient.id}>
                 <IngredientNameColumn key={1} name={this.props.ingredient.name}/>
-                <IngredientCountColumn key={2}/>
-                <PotionPreferenceColumn key={3} rowKey={this.props.rowKey} potions={this.props.ingredient.potions}/>
+                <IngredientCountColumn parentUpdateIngredientCount={this.props.parentUpdateIngredientCount}
+                                       key={2} ingredient={this.props.ingredient}/>
+                <PotionPreferenceColumn key={3} potions={this.props.ingredient.potions}/>
             </tr>
         );
     }
