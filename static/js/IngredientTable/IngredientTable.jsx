@@ -20,6 +20,7 @@ export default class IngredientTable extends React.Component {
     render() {
         const ingredients = this.state.ingredients;
         const parentUpdateIngredientCount = this.props.parentUpdateIngredientCount;
+        const parentUpdatePotionPreference = this.props.parentUpdatePotionPreference;
         let key = 0;
         return (
             <Table className={"table table-bordered"}>
@@ -29,7 +30,8 @@ export default class IngredientTable extends React.Component {
                         key += 1;
                         return (
                             <IngredientRow key={key} rowKey={key} ingredient={ingredient}
-                            parentUpdateIngredientCount={parentUpdateIngredientCount}/>
+                            parentUpdateIngredientCount={parentUpdateIngredientCount}
+                            parentUpdatePotionPreference={parentUpdatePotionPreference}/>
                         )
                     })}
                 </tbody>
