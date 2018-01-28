@@ -12,9 +12,20 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
-potion_ingredients_table = Table('PotionIngredients', db.Model.metadata,
-                                 Column('IngredientId', Integer, ForeignKey('Ingredients.id')),
-                                 Column('PotionId', Integer, ForeignKey('Potions.id')))
+class PotionIngredient(db.Model):
+    __tablename__ = 'PotionIngredients'
+
+    id = Column(Integer, primary_key=True)
+    ingredient_id = Column('IngredientId', Integer, ForeignKey('Ingredients.id'))
+    ingredient = relationship('Ingredient', uselist=False)
+    potion_id = Column('PotionId', Integer, ForeignKey('Potions.id'))
+    potion = relationship('Potion', uselist=False)
+    ingredients_per_potion = Column('IngredientsPerPotion', Integer, default=1)
+
+    def __init__(self, ingredient, potion, ingredients_per_potion=1):
+        self.ingredient = ingredient
+        self.potion = potion
+        self.ingredients_per_potion = ingredients_per_potion
 
 
 class Ingredient(db.Model):
@@ -23,7 +34,7 @@ class Ingredient(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String(100))
     xp_reward = Column(Float)
-    potions = relationship('Potion', secondary=potion_ingredients_table)
+    potion_ingredients = relationship('PotionIngredient', backref='Ingredient')
     ingredient_type_id = Column('IngredientTypeId', Integer, ForeignKey('IngredientTypes.id'))
 
     ingredient_type = relationship('IngredientType')
@@ -50,12 +61,11 @@ class Potion(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String(100))
     xp_reward = Column('XpReward', Float)
-    ingredients = relationship('Ingredient', secondary=potion_ingredients_table)
+    potion_ingredients = relationship('PotionIngredient', backref='Potion')
 
-    def __init__(self, name, xp_reward, ingredients):
+    def __init__(self, name, xp_reward):
         self.name = name
         self.xp_reward = xp_reward
-        self.ingredients = ingredients
 
 
 @app.route("/")
