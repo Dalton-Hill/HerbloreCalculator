@@ -64,8 +64,11 @@ export default class App extends React.Component {
     }
     updateIngredientCount(e){
         const ingredient_id = parseInt(e.target.getAttribute("ingredient-id"));
-        const count = parseInt(e.target.value);
+        let count = parseInt(e.target.value);
         let ingredients = this.state.ingredients.slice();
+        if(isNaN(count)){
+            count = 0;
+        }
         for (let i = 0; i < ingredients.length; i++){
             if (ingredient_id === ingredients[i].id){
                 ingredients[i].count = count;
@@ -84,6 +87,7 @@ export default class App extends React.Component {
                 break
             }
         }
+        console.log('Potion ID: ' + potion_id);
         this.setState({ingredients: ingredients});
     }
     render() {

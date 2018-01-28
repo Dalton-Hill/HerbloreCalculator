@@ -24,7 +24,7 @@ export default class PotionPreferenceColumn extends React.Component {
                 <FormGroup controlId={"formControlsSelect"}>
                     <FormControl componentClass={"select"} placeholder={"select"}
                                  ingredient-id={this.props.ingredient.id} onChange={parentUpdatePotionPreference}>
-                        <option key={key}>Choose a Potion</option>
+                        <option key={key} value={0} potion-ingredients={[]}>Choose a Potion</option>
                         {this.state.potions.map(function(potion) {
                             key += 1;
                             return (
