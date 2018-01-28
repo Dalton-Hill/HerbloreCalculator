@@ -1,6 +1,6 @@
 import React from "react";
 import IngredientTable from './IngredientTable/IngredientTable';
-import ResultTable from './ResultTable/ResultTable'
+import ResultDiv from './ResultDiv/ResultDiv'
 
 
 const ingredientsRequest = new window.Request('http://127.0.0.1:5000/api/Ingredients',
@@ -96,7 +96,7 @@ export default class App extends React.Component {
                                  parentUpdateIngredientCount={this.updateIngredientCount}
                                  parentUpdatePotionPreference={this.updatePotionPreference}
                 />
-                <ResultTable potions={this.state.potions} ingredients={this.state.ingredients}/>
+                <ResultDiv potions={this.state.potions} ingredients={this.state.ingredients}/>
             </div>
         );
     }
