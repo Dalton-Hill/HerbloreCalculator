@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
+import ResultRow from './ResultRow/ResultRow'
 
 
 const defaultPotionCountsToZero = (potions) => {
@@ -36,17 +37,32 @@ const calculatePossiblePotions = (ingredients, potions) => {
             potions[i].count = count;
         }
     }
-    console.log(potions);
-    return(potions);
+    return potions.slice();
 };
 
 
 export default class ResultTable extends React.Component{
     render(){
-        calculatePossiblePotions(this.props.ingredients.slice(), this.props.potions.slice());
+        const potions = calculatePossiblePotions(this.props.ingredients.slice(), this.props.potions.slice());
+        let key = 0;
         return(
             <Table className={"table table-bordered"}>
                 <thead><tr><th>Potion</th><th>Count</th><th>Experience</th></tr></thead>
+                <tbody>
+                    {potions.map(function(potion){
+                        console.log(potion);
+                        if(potion.count > 0){
+                            key += 1;
+                            return(
+                                <ResultRow
+                                    key={key}
+                                    potion={potion}
+                                >
+                                </ResultRow>
+                            )
+                        }
+                    })}
+                </tbody>
             </Table>
         );
     }

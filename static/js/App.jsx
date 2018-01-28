@@ -87,7 +87,6 @@ export default class App extends React.Component {
                 break
             }
         }
-        console.log('Potion ID: ' + potion_id);
         this.setState({ingredients: ingredients});
     }
     render() {
