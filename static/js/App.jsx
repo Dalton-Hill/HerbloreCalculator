@@ -36,7 +36,7 @@ export default class App extends React.Component {
                 let ingredients = data.objects;
                 for (let i = 0; i < ingredients.length; i++){
                     ingredients[i].count = 0;
-                    ingredients[i].potionPreferenceId = null;
+                    ingredients[i].potionPreferenceId = 0;
                 }
                 this.setState({ingredients: ingredients});
             });
@@ -54,9 +54,9 @@ export default class App extends React.Component {
                 let potions = data.objects;
                 for (let i = 0; i < potions.length; i++){
                     potions[i].count = 0;
-                    const ingredients = potions[i].ingredients;
-                    for (let x = 0; x < ingredients.length; x++){
-                        ingredients[x].count = 0;
+                    const potion_ingredients = potions[i].potion_ingredients;
+                    for (let x = 0; x < potion_ingredients.length; x++){
+                        potion_ingredients[x].count = 0;
                     }
                 }
                 this.setState({potions: potions});
@@ -93,6 +93,7 @@ export default class App extends React.Component {
         return (
             <div className={"Container"}>
                 <IngredientTable ingredients={this.state.ingredients}
+                                 potions={this.state.potions}
                                  parentUpdateIngredientCount={this.updateIngredientCount}
                                  parentUpdatePotionPreference={this.updatePotionPreference}
                 />

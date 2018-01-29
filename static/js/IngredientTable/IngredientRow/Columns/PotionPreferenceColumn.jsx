@@ -3,29 +3,29 @@ import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
 
 export default class PotionPreferenceColumn extends React.Component {
-    constructor(props){
-        super(props);
-        let potions = this.props.ingredient.potions;
-        if (potions === undefined) {
-            potions = new Array([])
-        }
-        this.state = {
-            potions: potions
-        };
-    }
-    componentWillReceiveProps(nextProps){
-        this.setState({potions: nextProps.ingredient.potions})
-    }
     render() {
         const parentUpdatePotionPreference = this.props.parentUpdatePotionPreference;
+        let ingredient = this.props.ingredient;
+        const all_potions = this.props.potions;
+        let potion_options = [];
+
+        if(!(ingredient.potion_ingredients === undefined) && !(all_potions === undefined)){
+            const ingredient_potions = ingredient.potion_ingredients.map(pi => pi.potion_id);
+            all_potions.map(function(potion){
+                if(ingredient_potions.indexOf(potion.id) !== -1){
+                    potion_options.push(potion);
+                }
+            })
+        }
+
         let key = 0;
         return (
             <td className={"PotionPreferenceColumn"}>
                 <FormGroup controlId={"formControlsSelect"}>
                     <FormControl componentClass={"select"} placeholder={"select"}
-                                 ingredient-id={this.props.ingredient.id} onChange={parentUpdatePotionPreference}>
+                                 ingredient-id={ingredient.id} onChange={parentUpdatePotionPreference}>
                         <option key={key} value={0} potion-ingredients={[]}>Choose a Potion</option>
-                        {this.state.potions.map(function(potion) {
+                        {potion_options.map(function(potion) {
                             key += 1;
                             return (
                                 <option

@@ -13,7 +13,7 @@ export default class IngredientRow extends React.Component {
                 <IngredientNameColumn key={1} name={this.props.ingredient.name}/>
                 <IngredientCountColumn parentUpdateIngredientCount={this.props.parentUpdateIngredientCount}
                                        key={2} ingredient={this.props.ingredient}/>
-                <PotionPreferenceColumn key={3} ingredient={this.props.ingredient}
+                <PotionPreferenceColumn key={3} ingredient={this.props.ingredient} potions={this.props.potions}
                                         parentUpdatePotionPreference={this.props.parentUpdatePotionPreference}/>
             </tr>
         );

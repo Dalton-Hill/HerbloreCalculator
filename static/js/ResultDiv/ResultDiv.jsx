@@ -20,8 +20,8 @@ const calculateExperience = (potion) => potion.xp_reward * potion.count;
 const defaultPotionCountsToZero = (potions) => {
     for(let i = 0; i < potions.length; i++){
         potions[i].count = 0;
-        for(let x = 0; x < potions[i].ingredients.length; x++){
-            potions[i].ingredients[x].count = 0;
+        for(let x = 0; x < potions[i].potion_ingredients.length; x++){
+            potions[i].potion_ingredients[x].count = 0;
         }
     }
     return potions.slice();
@@ -33,16 +33,16 @@ const calculatePossiblePotions = (ingredients, potions) => {
         potions = defaultPotionCountsToZero(potions);
         for(let i = 0; i < potions.length; i++){
             for(let x = 0; x < ingredients.length; x++){
-                for(let y = 0; y < potions[i].ingredients.length; y++){
-                    if(potions[i].ingredients[y].id === ingredients[x].id && potions[i].id === ingredients[x].potionPreferenceId){
-                        potions[i].ingredients[y].count = ingredients[x].count;
+                for(let y = 0; y < potions[i].potion_ingredients.length; y++){
+                    if(potions[i].potion_ingredients[y].ingredient_id === ingredients[x].id && potions[i].id === ingredients[x].potionPreferenceId){
+                        potions[i].potion_ingredients[y].count = Math.floor(ingredients[x].count / potions[i].potion_ingredients[y].ingredients_per_potion);
                     }
                 }
             }
             potions[i].count = 0;
             let ingredientsCount = [];
-            for(let z = 0; z < potions[i].ingredients.length; z++){
-                ingredientsCount.push(potions[i].ingredients[z].count)
+            for(let z = 0; z < potions[i].potion_ingredients.length; z++){
+                ingredientsCount.push(potions[i].potion_ingredients[z].count)
             }
             let count = Math.min(...ingredientsCount);
             if(isNaN(count)){

@@ -4,21 +4,11 @@ import { Table } from 'react-bootstrap';
 
 
 export default class IngredientTable extends React.Component {
-    constructor(props){
-        super(props);
-        let ingredients = this.props.ingredients;
-        if (ingredients === undefined) {
-            ingredients = new Array([])
-        }
-        this.state = {
-            ingredients: ingredients
-        }
-    }
-    componentWillReceiveProps(nextProps){
-        this.setState({ingredients: nextProps.ingredients})
-    }
     render() {
-        const ingredients = this.state.ingredients;
+        let ingredients = this.props.ingredients;
+        let potions = this.props.potions;
+        if(ingredients === undefined) ingredients = [];
+        if(potions === undefined) potions = [];
         const parentUpdateIngredientCount = this.props.parentUpdateIngredientCount;
         const parentUpdatePotionPreference = this.props.parentUpdatePotionPreference;
         let key = 0;
@@ -29,7 +19,7 @@ export default class IngredientTable extends React.Component {
                     {ingredients.map(function(ingredient) {
                         key += 1;
                         return (
-                            <IngredientRow key={key} rowKey={key} ingredient={ingredient}
+                            <IngredientRow key={key} rowKey={key} ingredient={ingredient} potions={potions}
                             parentUpdateIngredientCount={parentUpdateIngredientCount}
                             parentUpdatePotionPreference={parentUpdatePotionPreference}/>
                         )
