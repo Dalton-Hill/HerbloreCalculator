@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  nginx_demo:
+    image: nginx:1.13.7-alpine
+    container_name: nginx
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Nginx/Dockerfile
+    volumes:
+      - ./static:/usr/share/nginx/html
+    ports:
+      - "80:80"
+    depends_on:
+      - flask_api
+    links:
+      - flask_api
+
+  flask_api:
+    container_name: flask_api
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Server/Dockerfile
+    volumes:
+      - ./Server/app:/usr/src/app
+    ports:
+      - "5000:5000"

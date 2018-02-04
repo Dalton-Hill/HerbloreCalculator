@@ -10,7 +10,7 @@ const calculateTotalExperience = (potions) => {
             totalExperience += potions[i].totalExperience;
         }
     }
-    return totalExperience;
+    return totalExperience.toLocaleString();
 };
 
 

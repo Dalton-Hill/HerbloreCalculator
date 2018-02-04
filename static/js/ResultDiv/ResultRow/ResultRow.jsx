@@ -6,8 +6,8 @@ export default class ResultRow extends React.Component{
         return (
             <tr>
                 <td className={"PotionName"}>{this.props.potion.name}</td>
-                <td className={"PotionCount"}>{this.props.potion.count}</td>
-                <td className={"PotionExperience"}>{this.props.potion.totalExperience}</td>
+                <td className={"PotionCount"}>{this.props.potion.count.toLocaleString()}</td>
+                <td className={"PotionExperience"}>{this.props.potion.totalExperience.toLocaleString()}</td>
             </tr>
             )
     }

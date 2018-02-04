@@ -3,9 +3,9 @@ import IngredientTable from './IngredientTable/IngredientTable';
 import ResultDiv from './ResultDiv/ResultDiv'
 
 
-const ingredientsRequest = new window.Request('http://127.0.0.1:5000/api/Ingredients',
+const ingredientsRequest = new window.Request('http://localhost:80/api/Ingredients',
     {method: 'GET', dataType: 'json'});
-const potionsRequest = new window.Request('http://127.0.0.1:5000/api/Potions',
+const potionsRequest = new window.Request('http://localhost:80/api/Potions',
     {method: 'GET', dataType: 'json'});
 
 

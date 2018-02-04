@@ -1,13 +1,18 @@
+import os
+import platform
 import flask_restless
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, Table
+from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
 
-from server.HerbloreCalculator.secret import mysql_password
+database_path = os.path.join(os.getcwd(), '..', 'database', 'database.db')
+sqlite_prefix = 'sqlite:////'
+if platform.system().lower() == 'windows':
+    sqlite_prefix = sqlite_prefix[:-1]
 
-app = Flask(__name__, template_folder="../../static", static_folder='../../static/dist')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://root:{}@localhost/HerbloreCalculator'.format(mysql_password)
+app = Flask(__name__, template_folder="../static", static_folder='../static/dist')
+app.config['SQLALCHEMY_DATABASE_URI'] = sqlite_prefix + database_path
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -84,4 +89,4 @@ if __name__ == '__main__':
     ingredient_blueprint = manager.create_api(Ingredient, methods=['GET'])
     potion_blueprint = manager.create_api(Potion, methods=['GET'])
 
-    app.run()
+    app.run(host='0.0.0.0', debug=True, port=5000)
