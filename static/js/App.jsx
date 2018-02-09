@@ -3,9 +3,13 @@ import IngredientTable from './IngredientTable/IngredientTable';
 import ResultDiv from './ResultDiv/ResultDiv'
 
 
-const ingredientsRequest = new window.Request('http://localhost:80/api/Ingredients',
+let ip_address = "http://localhost:5000"; // LOCAL
+// let ip_address = "http://herb-calc-lb-1887002446.us-east-1.elb.amazonaws.com"; // PRODUCTION
+
+
+const ingredientsRequest = new window.Request(ip_address + '/api/Ingredients',
     {method: 'GET', dataType: 'json'});
-const potionsRequest = new window.Request('http://localhost:80/api/Potions',
+const potionsRequest = new window.Request(ip_address + '/api/Potions',
     {method: 'GET', dataType: 'json'});
 
 

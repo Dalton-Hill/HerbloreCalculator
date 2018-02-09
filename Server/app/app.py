@@ -85,10 +85,9 @@ def hello():
     return "Hello World"
 
 
+manager = flask_restless.APIManager(app, flask_sqlalchemy_db=db)
+ingredient_blueprint = manager.create_api(Ingredient, methods=['GET'], max_results_per_page=-1, results_per_page=-1)
+potion_blueprint = manager.create_api(Potion, methods=['GET'], max_results_per_page=-1, results_per_page=-1)
+
 if __name__ == '__main__':
-    manager = flask_restless.APIManager(app, flask_sqlalchemy_db=db)
-
-    ingredient_blueprint = manager.create_api(Ingredient, methods=['GET'])
-    potion_blueprint = manager.create_api(Potion, methods=['GET'])
-
     app.run(host='0.0.0.0', debug=True, port=5000)
