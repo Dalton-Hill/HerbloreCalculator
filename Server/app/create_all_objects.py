@@ -38,7 +38,7 @@ if __name__ == '__main__':
         'unicorn_horn_dust': app.Ingredient(name='Unicorn horn dust', ingredient_type=ingredient_types['secondary']),
         'limpwurt_root': app.Ingredient(name='Limpwurt Root', ingredient_type=ingredient_types['secondary']),
         'amylase_crystal': app.Ingredient(name='Amylase Crystal', ingredient_type=ingredient_types['secondary']),
-        'yew_roots': app.Ingredient(name='Amylase Crystal', ingredient_type=ingredient_types['secondary']),
+        'yew_roots': app.Ingredient(name='Yew Roots', ingredient_type=ingredient_types['secondary']),
         'crushed_birds_nest': app.Ingredient(name='Crushed bird\'s nest',
                                              ingredient_type=ingredient_types['secondary']),
         'coconut_milk': app.Ingredient(name='Coconut milk', ingredient_type=ingredient_types['secondary']),

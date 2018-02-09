@@ -17,14 +17,19 @@ export default class PotionPreferenceColumn extends React.Component {
                 }
             })
         }
-
-        let key = 0;
+        let key = 1;
+        let potionPreferenceId = this.props.ingredient.potionPreferenceId;
+        let displayBlankOption = true;
+        if(potion_options.length === 1){
+            potionPreferenceId = potion_options[0].id;
+            displayBlankOption = false;
+        }
         return (
             <td className={"PotionPreferenceColumn"}>
                 <FormGroup controlId={"formControlsSelect"}>
                     <FormControl componentClass={"select"} placeholder={"select"}
-                                 ingredient-id={ingredient.id} onChange={parentUpdatePotionPreference}>
-                        <option key={key} value={0} potion-ingredients={[]}>Choose a Potion</option>
+                                 ingredient-id={ingredient.id} onChange={parentUpdatePotionPreference} defaultValue={potionPreferenceId}>
+                        <option key={0} value={0} potion-ingredients={[]} hidden={displayBlankOption}>Choose a Potion</option>
                         {potion_options.map(function(potion) {
                             key += 1;
                             return (

@@ -40,7 +40,11 @@ export default class App extends React.Component {
                 let ingredients = data.objects;
                 for (let i = 0; i < ingredients.length; i++){
                     ingredients[i].count = 0;
-                    ingredients[i].potionPreferenceId = 0;
+                    if(ingredients[i].potion_ingredients.length === 1){
+                        ingredients[i].potionPreferenceId = ingredients[i].potion_ingredients[0].potion_id;
+                    } else {
+                        ingredients[i].potionPreferenceId = 0;
+                    }
                 }
                 this.setState({ingredients: ingredients});
             });
@@ -66,7 +70,7 @@ export default class App extends React.Component {
                 this.setState({potions: potions});
             });
     }
-    updateIngredientCount(e){
+    updateIngredientCount(e){ //err test
         const ingredient_id = parseInt(e.target.getAttribute("ingredient-id"));
         let count = parseInt(e.target.value);
         let ingredients = this.state.ingredients.slice();
@@ -94,6 +98,7 @@ export default class App extends React.Component {
         this.setState({ingredients: ingredients});
     }
     render() {
+        console.log(this.state.ingredients);
         return (
             <div className={"Container"}>
                 <IngredientTable ingredients={this.state.ingredients}
