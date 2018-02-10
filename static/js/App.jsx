@@ -3,8 +3,8 @@ import IngredientTable from './IngredientTable/IngredientTable';
 import ResultDiv from './ResultDiv/ResultDiv'
 
 
-let ip_address = "http://localhost:5000"; // LOCAL
-// let ip_address = "http://herb-calc-lb-1887002446.us-east-1.elb.amazonaws.com"; // PRODUCTION
+// const ip_address = "http://localhost:5000"; // LOCAL
+const ip_address = "http://herb-calc-lb-1887002446.us-east-1.elb.amazonaws.com"; // PRODUCTION
 
 
 const ingredientsRequest = new window.Request(ip_address + '/api/Ingredients',
@@ -70,7 +70,7 @@ export default class App extends React.Component {
                 this.setState({potions: potions});
             });
     }
-    updateIngredientCount(e){ //err test
+    updateIngredientCount(e){
         const ingredient_id = parseInt(e.target.getAttribute("ingredient-id"));
         let count = parseInt(e.target.value);
         let ingredients = this.state.ingredients.slice();
@@ -98,7 +98,6 @@ export default class App extends React.Component {
         this.setState({ingredients: ingredients});
     }
     render() {
-        console.log(this.state.ingredients);
         return (
             <div className={"Container"}>
                 <IngredientTable ingredients={this.state.ingredients}
